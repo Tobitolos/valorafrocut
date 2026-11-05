@@ -372,26 +372,65 @@ h1, h2, h3, p { margin: 0; }
 #how.steps-band {
   background: #000;
   color: #fff;
-  padding: 120px 24px 128px;
+  padding: 108px 0 120px;
+  overflow: hidden;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
 }
+#how.steps-band.is-in { transform: none; opacity: 1; }
+.steps-head { text-align: center; padding: 0 24px; margin-bottom: 8px; }
+.step-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 54px 0 42px;
+}
+.step-track {
+  display: flex;
+  align-items: stretch;
+  will-change: transform;
+}
+.step-slider .step {
+  flex: 0 0 min(640px, 48vw);
+  margin: 0 16px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 42px;
+  transform: scale(0.9) translateY(28px);
+  opacity: 0.42;
+  z-index: 1;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s ease, background 0.75s ease, border-color 0.75s ease, box-shadow 0.75s ease;
+}
+.step-slider .step.is-current {
+  transform: scale(1) translateY(-26px);
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+.step-slider .step h3 { font-size: clamp(1.8rem, 3vw, 2.7rem); }
+.step-slider .step p { font-size: 1.16rem; max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.5; }
 #how.steps-band h2,
 #how.steps-band h3,
 #how.steps-band .eyebrow,
 #how.steps-band .step-no { color: #fff; }
 #how.steps-band .step p,
 #how.steps-band .section-head p { color: rgba(255, 255, 255, 0.86); }
-#how.steps-band .section-head { text-align: center; }
-#how.steps-band .section-head h2 { display: inline-block; }
-#how.steps-band .section-head h2::after {
+#how.steps-band .steps-head h2 { display: inline-block; }
+#how.steps-band .steps-head h2::after {
   content: "";
   display: block;
   width: 0;
   height: 1px;
   margin: 16px auto 0;
   background: #fff;
-  transition: width 0.7s ease 0.15s;
+  transition: width 0.7s ease 0.2s;
 }
-#how.steps-band .section-head.is-in h2::after { width: 76px; }
+#how.steps-band.is-in .steps-head h2::after { width: 76px; }
 #visit {
   background: #fff;
   color: #111;
@@ -596,12 +635,10 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(64px);
-  filter: blur(8px);
+  transform: translateY(110px);
   transition:
-    opacity 0.85s ease,
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.85s ease,
+    opacity 0.9s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
     clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 [data-reveal="clip"] {
@@ -612,7 +649,6 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
 [data-reveal].is-in {
   opacity: 1;
   transform: none;
-  filter: none;
   clip-path: inset(0);
 }
 
@@ -718,7 +754,16 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
   .cards { gap: 16px; }
   .card img { height: 190px; }
   .card .btn { width: 100%; }
-  .steps { gap: 22px; }
+  #how.steps-band { padding: 72px 0 96px; }
+  .step-slider .step {
+    flex-basis: 64vw;
+    min-height: 250px;
+    margin: 0 10px;
+    padding: 32px 22px;
+  }
+  .step-slider .step h3 { font-size: 1.7rem; }
+  .step-slider .step p { font-size: 1.02rem; }
+  .step-slider .step.is-current { transform: scale(1) translateY(-14px); }
   .choice-grid { grid-template-columns: 1fr 1fr; }
   .map-frame iframe { height: 240px; }
   .sheet { padding: 18px; }
@@ -737,6 +782,8 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
   .hero-actions { animation: none; }
   .hero-copy { opacity: 1; transform: none; }
   .hero::before { transform: none; }
-  [data-reveal] { opacity: 1; transform: none; filter: none; clip-path: none; }
+  [data-reveal] { opacity: 1; transform: none; clip-path: none; }
+  #how.steps-band { opacity: 1; transform: none; transition: none; }
   #how.steps-band .section-head h2::after { width: 76px; transition: none; }
+  .step-track, .step-slider .step { transition: none; }
 }
