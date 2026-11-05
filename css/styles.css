@@ -195,6 +195,15 @@ h1, h2, h3, p { margin: 0; }
   margin-bottom: 18px;
 }
 .story p { color: #3a3a3a; font-size: 1.05rem; max-width: 460px; }
+.about-copy h2 {
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 18px;
+}
+.about-copy p { color: #3a3a3a; font-size: 1.05rem; max-width: 520px; }
+.about-copy p + p { margin-top: 14px; }
 
 .split {
   display: grid;
@@ -472,13 +481,51 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
 }
 
 @media (max-width: 680px) {
-  .section { padding: 72px 18px; }
-  .hero { padding: 48px 20px 128px; min-height: calc(100svh - var(--header)); }
+  .section { padding: 56px 18px; }
+  .header-inner { padding: 8px 14px; gap: 8px; }
+  .brand img { height: 42px; }
+  .hero {
+    min-height: 0;
+    align-items: flex-end;
+    padding: 28px 18px 32px;
+    background-position: center 20%;
+  }
+  .hero-lockup { width: min(260px, 78%); margin-bottom: 14px; }
+  .hero-title { font-size: 1.65rem; }
+  .hero .sub { font-size: 0.98rem; margin-top: 10px; }
+  .hero-actions { flex-direction: row; margin-top: 20px; }
+  .hero-actions .btn { min-width: 0; flex: 1; padding: 0 12px; letter-spacing: 0.08em; }
+  .about-copy h2 { font-size: 2.4rem; }
+  #about .frame, #about .frame img { min-height: 0; height: 280px; }
+  .triptych {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 8px;
+    margin-left: -18px;
+    margin-right: -18px;
+    padding: 0 18px 8px;
+  }
+  .triptych img {
+    flex: 0 0 78%;
+    width: 78%;
+    height: 220px;
+    min-height: 0;
+    scroll-snap-align: start;
+  }
+  .cards { gap: 16px; }
+  .card img { height: 190px; }
+  .card .btn { width: 100%; }
+  .steps { gap: 22px; }
+  .choice-grid { grid-template-columns: 1fr 1fr; }
+  .map-frame iframe { height: 240px; }
+  .sheet { padding: 18px; }
+  .footer-inner { gap: 16px; }
   .products { grid-template-columns: 1fr; }
   .mobile-bar { display: grid; }
-  body { padding-bottom: 78px; }
-  .brand img { height: 46px; }
-  .triptych { grid-template-columns: 1fr; }
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+  .site-footer { padding-bottom: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

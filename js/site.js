@@ -16,6 +16,7 @@ const SITE = {
 
 const NAV = [
   ["#top", "top", "Home"],
+  ["#about", "about", "About"],
   ["#visit", "visit", "Book Now"],
 ];
 
