@@ -27,7 +27,7 @@
         <p class="hero-title">Afro cuts, done with time.</p>
         <p class="sub">I’m Valor Afro Cut. I shape afros, fades, waves, and beards, and I finish the detail before you leave the chair.</p>
         <div class="hero-actions">
-          <a class="btn btn-light" href="#book">Book a cut</a>
+          <a class="btn btn-light" href="#visit">Book now</a>
           <a class="btn btn-light js-phone" data-label="Call"></a>
         </div>
       </div>
@@ -71,7 +71,7 @@
             <div class="card-body">
               <h3>Afro shape — $45</h3>
               <p class="meta">45 minutes<br>Sculpt the silhouette and set the shape.</p>
-              <a class="btn btn-dark btn-small" href="#book" data-pick="afro-shape">Book</a>
+              <a class="btn btn-dark btn-small" href="#visit" data-pick="afro-shape">Book now</a>
             </div>
           </article>
           <article class="card">
@@ -79,7 +79,7 @@
             <div class="card-body">
               <h3>Fade — $40</h3>
               <p class="meta">40 minutes<br>Low, mid, or skin fade with a sharp lineup.</p>
-              <a class="btn btn-dark btn-small" href="#book" data-pick="fade">Book</a>
+              <a class="btn btn-dark btn-small" href="#visit" data-pick="fade">Book now</a>
             </div>
           </article>
           <article class="card">
@@ -87,7 +87,7 @@
             <div class="card-body">
               <h3>Cut and beard — $65</h3>
               <p class="meta">50 minutes<br>Hair and beard shaped in the same sitting.</p>
-              <a class="btn btn-dark btn-small" href="#book" data-pick="cut-beard">Book</a>
+              <a class="btn btn-dark btn-small" href="#visit" data-pick="cut-beard">Book now</a>
             </div>
           </article>
           <article class="card">
@@ -95,7 +95,7 @@
             <div class="card-body">
               <h3>Beard — $30</h3>
               <p class="meta">25 minutes<br>Line, shape, and a hot towel.</p>
-              <a class="btn btn-dark btn-small" href="#book" data-pick="beard">Book</a>
+              <a class="btn btn-dark btn-small" href="#visit" data-pick="beard">Book now</a>
             </div>
           </article>
           <article class="card">
@@ -103,7 +103,7 @@
             <div class="card-body">
               <h3>Waves — $35</h3>
               <p class="meta">30 minutes<br>Brush work and a plan for the week.</p>
-              <a class="btn btn-dark btn-small" href="#book" data-pick="waves">Book</a>
+              <a class="btn btn-dark btn-small" href="#visit" data-pick="waves">Book now</a>
             </div>
           </article>
           <article class="card">
@@ -111,7 +111,7 @@
             <div class="card-body">
               <h3>Kids, 12 and under — $30</h3>
               <p class="meta">30 minutes<br>A patient cut and a clean finish.</p>
-              <a class="btn btn-dark btn-small" href="#book" data-pick="kids">Book</a>
+              <a class="btn btn-dark btn-small" href="#visit" data-pick="kids">Book now</a>
             </div>
           </article>
         </div>
@@ -144,13 +144,35 @@
       </div>
     </section>
 
-    <section class="section ink" id="book">
-      <div class="wrap contact-grid">
+    <section class="section white" id="visit">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Hello</p>
+          <h2>Get in touch</h2>
+          <p>281 Livingstone Street West, Barrie. Send a note or call, and I’ll confirm a time.</p>
+        </div>
+        <div class="map-frame">
+          <iframe
+            title="Map of 281 Livingstone Street West, Barrie"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-79.73912%2C44.39181%2C-79.71912%2C44.40781&amp;layer=mapnik&amp;marker=44.3998092%2C-79.7291205"
+            loading="lazy"></iframe>
+        </div>
+        <p style="margin-top:12px;"><a href="https://www.google.com/maps/search/?api=1&amp;query=281+Livingstone+Street+West,+Barrie,+ON+L4N+7C7" target="_blank" rel="noopener noreferrer">Open in Google Maps</a></p>
+      </div>
+      <div class="wrap contact-grid" style="margin-top:36px;">
         <div>
-          <p class="eyebrow">Book</p>
-          <h2 class="block-title">Get on the book.</h2>
-          <p class="lede">Send a request and I’ll confirm by phone or email. Cuts are by appointment for now.</p>
-          <p class="lede">Or call <a class="js-phone"></a>.</p>
+          <div class="info-block">
+            <h3>Address</h3>
+            <p class="js-address"></p>
+          </div>
+          <div class="info-block">
+            <h3>Reach me</h3>
+            <p class="stack">
+              <a class="js-phone"></a>
+              <a class="js-email"></a>
+              <a class="js-instagram"></a>
+            </p>
+          </div>
         </div>
         <form class="sheet" data-form="book" novalidate>
           <div class="fields">
@@ -204,46 +226,6 @@
           <div class="form-success" hidden>
             <h3>Request ready to send.</h3>
             <p>Your email app should open with the details. If it does not, call <a class="js-phone"></a>.</p>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <section class="section white" id="visit">
-      <div class="wrap contact-grid">
-        <div>
-          <p class="eyebrow">Hello</p>
-          <h2 class="block-title">Get in touch</h2>
-          <p class="lede">A question, a photo of a cut you want, or a time that works. That’s enough for now.</p>
-          <div class="info-block">
-            <h3>Reach me</h3>
-            <p class="stack">
-              <a class="js-phone"></a>
-              <a class="js-email"></a>
-              <a class="js-instagram"></a>
-            </p>
-          </div>
-        </div>
-        <form class="sheet" data-form="contact" novalidate>
-          <div class="fields">
-            <label>Name*
-              <input name="name" required autocomplete="name" placeholder="Your name">
-            </label>
-            <label>Phone*
-              <input name="phone" type="tel" required autocomplete="tel" placeholder="Phone number">
-            </label>
-            <label>Email*
-              <input name="email" type="email" required autocomplete="email" placeholder="Your email">
-            </label>
-            <label>Message*
-              <textarea name="message" required placeholder="What do you want to know?"></textarea>
-            </label>
-          </div>
-          <p class="form-error" role="alert" hidden></p>
-          <button class="btn btn-fill" type="submit">Send</button>
-          <div class="form-success" hidden>
-            <h3>Message ready to send.</h3>
-            <p>Your email app should open with this note. You can also call <a class="js-phone"></a>.</p>
           </div>
         </form>
       </div>

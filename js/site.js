@@ -6,7 +6,7 @@ const SITE = {
   email: "hello@valorafrocut.com",
   instagram: "https://instagram.com/valorafrocut",
   instagramHandle: "@valorafrocut",
-  address: ["Add your street address", "City, Province"],
+  address: ["281 Livingstone Street West", "Barrie, ON L4N 7C7"],
   hours: [
     ["Monday – Thursday", "10:00 AM – 7:00 PM"],
     ["Friday – Saturday", "9:00 AM – 7:00 PM"],
@@ -16,9 +16,7 @@ const SITE = {
 
 const NAV = [
   ["#top", "top", "Home"],
-  ["#work", "work", "The Work"],
-  ["#book", "book", "Book Now"],
-  ["#visit", "visit", "Get In Touch"],
+  ["#visit", "visit", "Book Now"],
 ];
 
 const SERVICE_PICKS = {
@@ -135,7 +133,7 @@ function renderHireDialog() {
 function renderMobileBar() {
   const bar = el(`
     <div class="mobile-bar">
-      <a class="btn btn-light" href="#book">Book now</a>
+      <a class="btn btn-light" href="#visit">Book now</a>
       <a class="btn btn-light js-phone" data-label="Call"></a>
     </div>
   `);
