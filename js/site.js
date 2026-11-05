@@ -294,107 +294,56 @@ function setupStepSlider() {
   const section = document.getElementById("how");
   if (!root || !section) return;
 
-  const track = root.querySelector(".step-track");
-  const originals = [...track.children];
-  const count = originals.length;
+  const cards = [...root.querySelectorAll(".step")];
+  const count = cards.length;
+  let index = 0;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const lastClone = originals[count - 1].cloneNode(true);
-  const firstClone = originals[0].cloneNode(true);
-  lastClone.dataset.clone = "true";
-  firstClone.dataset.clone = "true";
-  lastClone.setAttribute("aria-hidden", "true");
-  firstClone.setAttribute("aria-hidden", "true");
-  track.prepend(lastClone);
-  track.append(firstClone);
-
-  let index = 1;
-  let timer = 0;
-
-  const slides = () => [...track.children];
-
-  function span() {
-    const card = track.children[0];
-    const style = getComputedStyle(card);
-    return card.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-  }
-
-  function place(animate) {
-    const distance = span();
-    const offset = root.clientWidth / 2 - distance / 2 - index * distance;
-    track.style.transition = animate
-      ? "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
-      : "none";
-    if (!animate) void track.offsetWidth;
-    track.style.transform = `translate3d(${offset}px, 0, 0)`;
-    slides().forEach((slide, i) => {
-      const current = i === index;
-      slide.classList.toggle("is-current", current);
-      if (!slide.dataset.clone) slide.setAttribute("aria-hidden", current ? "false" : "true");
+  function render() {
+    cards.forEach((card, i) => {
+      let pos = i - index;
+      if (pos > count / 2) pos -= count;
+      if (pos < -count / 2) pos += count;
+      card.dataset.pos = String(pos);
+      card.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
     });
   }
 
-  function settle() {
-    if (index === 0) index = count;
-    else if (index === count + 1) index = 1;
-    else return;
-    place(false);
-  }
-
-  track.addEventListener("transitionend", (event) => {
-    if (event.target !== track || event.propertyName !== "transform") return;
-    settle();
-  });
-
   function next() {
-    index += 1;
-    place(true);
+    index = (index + 1) % count;
+    render();
   }
 
-  function start() {
-    if (reduce) return;
-    window.clearInterval(timer);
-    timer = window.setInterval(next, 2800);
-  }
+  render();
+  if (!reduce) window.setInterval(next, 2600);
 
-  function stop() {
-    window.clearInterval(timer);
-  }
-
-  root.addEventListener("mouseenter", stop);
-  root.addEventListener("mouseleave", start);
-  root.addEventListener("focusin", stop);
-  root.addEventListener("focusout", start);
-  window.addEventListener("resize", () => place(false));
-
-  const reveal = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        section.classList.add("is-in");
-        reveal.disconnect();
-      });
-    },
-    { threshold: 0.22 }
-  );
-  if (reduce) section.classList.add("is-in");
-  else reveal.observe(section);
-
-  if (!reduce) {
-    window.addEventListener(
-      "scroll",
-      () => {
-        const rect = section.getBoundingClientRect();
-        const passed = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        const lift = Math.max(0, Math.min(48, (passed - 0.2) * 80));
-        root.style.transform = `translateY(${-lift}px)`;
+  if (section.getBoundingClientRect().top > window.innerHeight * 0.75 && !reduce) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        section.classList.add("rise");
+        observer.disconnect();
       },
-      { passive: true }
+      { threshold: 0.2 }
     );
+    observer.observe(section);
   }
+}
 
-  place(false);
-  start();
+function setupToTop() {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "to-top";
+  button.setAttribute("aria-label", "Back to top");
+  button.textContent = "↑";
+  document.body.append(button);
+
+  const toggle = () => button.classList.toggle("is-on", window.scrollY > 500);
+  window.addEventListener("scroll", toggle, { passive: true });
+  toggle();
+  button.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
 
 function setupMotion() {
@@ -493,3 +442,4 @@ setupServicePicks();
 setupScrollSpy();
 setupMotion();
 setupStepSlider();
+setupToTop();
