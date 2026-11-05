@@ -800,7 +800,7 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
 
 #about .frame,
 #about .frame img { height: 560px; min-height: 560px; }
-#about .about-photo { object-position: 30% 0%; }
+#about .about-photo { object-position: 32% 58%; }
 @media (max-width: 680px) {
   #about .frame,
   #about .frame img { height: 480px; min-height: 480px; }
