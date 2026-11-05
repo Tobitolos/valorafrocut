@@ -798,6 +798,14 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
   .site-footer { padding-bottom: 12px; }
 }
 
+#about .frame,
+#about .frame img { height: 560px; min-height: 560px; }
+#about .about-photo { object-position: 30% 0%; }
+@media (max-width: 680px) {
+  #about .frame,
+  #about .frame img { height: 480px; min-height: 480px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .btn, .card, .card img, .triptych img, .step, [data-reveal], .site-header, .nav, .nav a { transition: none; }
