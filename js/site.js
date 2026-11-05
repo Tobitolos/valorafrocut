@@ -57,11 +57,11 @@ function renderHeader() {
         </nav>
         <div class="scroll-progress" aria-hidden="true"><span></span></div>
         <div class="header-tools">
-          <a class="icon-link js-instagram" aria-label="Valor Afro Cut on Instagram">${INSTAGRAM_ICON}</a>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
             <span class="sr-only">Menu</span>
             <span></span><span></span><span></span>
           </button>
+          <a class="icon-link js-instagram" aria-label="Valor Afro Cut on Instagram">${INSTAGRAM_ICON}</a>
         </div>
       </div>
     </header>
