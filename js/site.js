@@ -273,6 +273,41 @@ function setupServicePicks() {
   if (day) day.min = new Date().toISOString().slice(0, 10);
 }
 
+function setupMotion() {
+  const header = document.querySelector(".site-header");
+  const hero = document.querySelector(".hero");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const onScroll = () => {
+    const y = window.scrollY;
+    if (header) header.classList.toggle("is-scrolled", y > 8);
+    if (hero && !reduce) {
+      const shift = Math.min(y * 0.16, 70);
+      hero.style.setProperty("--hero-shift", `${shift}px`);
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const targets = [...document.querySelectorAll("[data-reveal]")];
+  if (!targets.length) return;
+  if (reduce || !("IntersectionObserver" in window)) {
+    targets.forEach((node) => node.classList.add("is-in"));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+  );
+  targets.forEach((node) => observer.observe(node));
+}
+
 function setupScrollSpy() {
   const links = [...document.querySelectorAll(".nav a")];
   const sections = links
@@ -282,12 +317,16 @@ function setupScrollSpy() {
 
   const mark = () => {
     const line = window.scrollY + 160;
-    let current = sections[0];
-    [...sections]
-      .sort((a, b) => a.offsetTop - b.offsetTop)
-      .forEach((section) => {
-        if (section.offsetTop <= line) current = section;
-      });
+    const placed = sections
+      .map((section) => ({
+        section,
+        top: section.getBoundingClientRect().top + window.scrollY,
+      }))
+      .sort((a, b) => a.top - b.top);
+    let current = placed[0].section;
+    placed.forEach(({ section, top }) => {
+      if (top <= line) current = section;
+    });
     links.forEach((link) => {
       if (link.getAttribute("href") === `#${current.id}`) link.setAttribute("aria-current", "page");
       else link.removeAttribute("aria-current");
@@ -308,3 +347,4 @@ setupMenu();
 setupForms();
 setupServicePicks();
 setupScrollSpy();
+setupMotion();
