@@ -55,6 +55,7 @@ function renderHeader() {
         <nav class="nav" id="site-nav" aria-label="Primary">
           ${links}
         </nav>
+        <div class="scroll-progress" aria-hidden="true"><span></span></div>
         <div class="header-tools">
           <a class="icon-link js-instagram" aria-label="Valor Afro Cut on Instagram">${INSTAGRAM_ICON}</a>
           <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -183,18 +184,33 @@ function setupMenu() {
   const nav = document.getElementById("site-nav");
   if (!toggle || !nav) return;
 
+  const shade = document.createElement("button");
+  shade.className = "nav-shade";
+  shade.type = "button";
+  shade.hidden = true;
+  shade.setAttribute("aria-label", "Close menu");
+  document.body.append(shade);
+
   const close = () => {
     nav.classList.remove("is-open");
     toggle.setAttribute("aria-expanded", "false");
     document.body.classList.remove("nav-open");
+    shade.hidden = true;
+  };
+
+  const open = () => {
+    nav.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.classList.add("nav-open");
+    shade.hidden = false;
   };
 
   toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    document.body.classList.toggle("nav-open", open);
+    if (nav.classList.contains("is-open")) close();
+    else open();
   });
 
+  shade.addEventListener("click", close);
   nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") close();
@@ -278,12 +294,25 @@ function setupMotion() {
   const hero = document.querySelector(".hero");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  document.querySelectorAll(".cards, .steps, .triptych").forEach((group) => {
+    [...group.children].forEach((child, index) => {
+      if (child.hasAttribute("data-reveal")) child.style.transitionDelay = `${index * 0.14}s`;
+    });
+  });
+
   const onScroll = () => {
     const y = window.scrollY;
-    if (header) header.classList.toggle("is-scrolled", y > 8);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (header) {
+      header.classList.toggle("is-scrolled", y > 8);
+      header.style.setProperty("--progress", max > 0 ? String(y / max) : "0");
+    }
     if (hero && !reduce) {
-      const shift = Math.min(y * 0.16, 70);
-      hero.style.setProperty("--hero-shift", `${shift}px`);
+      const span = hero.offsetHeight || 1;
+      const passed = Math.min(y / span, 1);
+      hero.style.setProperty("--hero-shift", `${y * 0.28}px`);
+      hero.style.setProperty("--hero-fade", String(Math.max(0, 1 - passed * 1.15)));
+      hero.style.setProperty("--hero-lift", `${passed * 70}px`);
     }
   };
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -300,10 +329,17 @@ function setupMotion() {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add("is-in");
+        entry.target.addEventListener(
+          "transitionend",
+          () => {
+            entry.target.style.transitionDelay = "0s";
+          },
+          { once: true }
+        );
         observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+    { threshold: 0.2, rootMargin: "0px 0px -6% 0px" }
   );
   targets.forEach((node) => observer.observe(node));
 }
