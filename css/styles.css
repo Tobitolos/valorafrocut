@@ -758,8 +758,7 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
   .hero::before { background-position: center 18%; }
   .hero-lockup { width: min(280px, 82%); margin-bottom: 16px; }
   .hero-line { font-size: 1.12rem; }
-  .hero-actions { margin-top: 22px; }
-  .hero-actions .btn { min-width: 0; flex: 1; padding: 0 12px; letter-spacing: 0.08em; }
+  .hero-actions { display: none; }
   .triptych {
     display: flex;
     grid-template-columns: none;
