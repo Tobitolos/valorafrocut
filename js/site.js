@@ -16,11 +16,9 @@ const SITE = {
 
 const NAV = [
   ["#top", "top", "Home"],
-  ["#visit", "visit", "Get In Touch"],
-  ["#products", "products", "In Store Products"],
+  ["#work", "work", "The Work"],
   ["#book", "book", "Book Now"],
-  ["#deals", "deals", "Deals"],
-  ["#advertise", "advertise", "Advertise with Us"],
+  ["#visit", "visit", "Get In Touch"],
 ];
 
 const SERVICE_PICKS = {
@@ -305,11 +303,9 @@ function setupScrollSpy() {
 
 renderHeader();
 renderFooter();
-renderHireDialog();
 renderMobileBar();
 fillSiteBits();
 setupMenu();
-setupHire();
 setupForms();
 setupServicePicks();
 setupScrollSpy();
