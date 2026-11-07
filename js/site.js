@@ -1,11 +1,11 @@
 /* Shop details live here. Replace the placeholders before the site goes public. */
 const SITE = {
   name: "Valor Afro Cut",
-  phoneDisplay: "(555) 010-0142",
-  phoneTel: "+15550100142",
+  phoneDisplay: "(382) 885-3588",
+  phoneTel: "+13828853588",
   email: "hello@valorafrocut.com",
-  instagram: "https://instagram.com/valorafrocut",
-  instagramHandle: "@valorafrocut",
+  tiktok: "https://www.tiktok.com/@valor.afrocut",
+  tiktokHandle: "@valor.afrocut",
   address: ["281 Livingstone Street West", "Barrie, ON L4N 7C7"],
   hours: [
     ["Monday – Thursday", "10:00 AM – 7:00 PM"],
@@ -31,7 +31,7 @@ const SERVICE_PICKS = {
   ritual: "Valor Ritual — $140",
 };
 
-const INSTAGRAM_ICON = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7zm11.2 1.3a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>`;
+const TIKTOK_ICON = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z"/></svg>`;
 
 function el(html) {
   const template = document.createElement("template");
@@ -61,7 +61,7 @@ function renderHeader() {
             <span class="sr-only">Menu</span>
             <span></span><span></span><span></span>
           </button>
-          <a class="icon-link js-instagram" aria-label="Valor Afro Cut on Instagram">${INSTAGRAM_ICON}</a>
+          <a class="icon-link js-tiktok" aria-label="Valor Afro Cut on TikTok">${TIKTOK_ICON}</a>
         </div>
       </div>
     </header>
@@ -82,7 +82,7 @@ function renderFooter() {
         <div class="footer-meta">
           <a class="js-phone"></a>
           <a class="js-email"></a>
-          <a class="js-instagram">${SITE.instagramHandle}</a>
+          <a class="js-tiktok">${SITE.tiktokHandle}</a>
         </div>
         <p class="copyright">© <span data-year></span> Valor Afro Cut. All rights reserved.</p>
       </div>
@@ -152,18 +152,12 @@ function fillSiteBits(root = document) {
     node.href = `mailto:${SITE.email}`;
     node.textContent = SITE.email;
   });
-  root.querySelectorAll(".js-instagram").forEach((node) => {
-    node.href = SITE.instagram;
-    if (node.classList.contains("icon-link")) {
-      node.target = "_blank";
-      node.rel = "noopener noreferrer";
-    } else if (!node.querySelector("svg")) {
-      node.textContent = node.textContent || SITE.instagramHandle;
-      node.target = "_blank";
-      node.rel = "noopener noreferrer";
-    } else {
-      node.target = "_blank";
-      node.rel = "noopener noreferrer";
+  root.querySelectorAll(".js-tiktok").forEach((node) => {
+    node.href = SITE.tiktok;
+    node.target = "_blank";
+    node.rel = "noopener noreferrer";
+    if (!node.classList.contains("icon-link") && !node.querySelector("svg")) {
+      node.textContent = node.textContent || SITE.tiktokHandle;
     }
   });
   root.querySelectorAll(".js-address").forEach((node) => {
