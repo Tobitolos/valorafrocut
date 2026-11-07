@@ -15,14 +15,15 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   margin: 0;
   font-family: var(--font);
   color: var(--ink);
   background: var(--white);
   line-height: 1.55;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
 }
 body.nav-open { overflow: hidden; }
 img { max-width: 100%; display: block; }
@@ -384,6 +385,7 @@ h1, h2, h3, p { margin: 0; }
   min-height: 460px;
   margin: 0 auto;
   padding: 28px 0 12px;
+  overflow: hidden;
 }
 .step-track { display: contents; }
 .step-slider .step {
@@ -693,7 +695,10 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
     position: static;
     transform: none;
     margin-left: auto;
+    flex-direction: row-reverse;
   }
+  html, body { overscroll-behavior-x: none; touch-action: pan-y; }
+  .triptych { touch-action: pan-x pan-y; }
   .nav {
     position: fixed;
     top: var(--header);
