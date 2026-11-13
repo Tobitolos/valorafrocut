@@ -69,19 +69,37 @@ function renderHeader() {
 
 function renderFooter() {
   const links = NAV.map(([href, , label]) => `<a href="${href}">${label}</a>`).join("");
+  const address = SITE.address.map((line) => `<span>${line}</span>`).join("<br>");
+  const hours = SITE.hours.map(([day, time]) => `${day} ${time}`).join("<br>");
   const footer = el(`
     <footer class="site-footer">
       <div class="footer-inner">
-        <a class="brand" href="#top">
-          <img src="images/logo.png" alt="Valor Afro Cut">
-        </a>
-        <nav class="footer-nav" aria-label="Footer">${links}</nav>
-        <div class="footer-meta">
-          <a class="js-phone"></a>
-          <a class="js-email"></a>
-          <a class="js-tiktok">${SITE.tiktokHandle}</a>
-          <a class="js-profile">Google profile</a>
-          <a class="js-review">Leave a review</a>
+        <div class="footer-top">
+          <a class="brand" href="#top">
+            <img src="images/logo.png" alt="Valor Afro Cut">
+          </a>
+          <p class="footer-tag">Afro cuts, fades, waves, and beards in Barrie.</p>
+        </div>
+        <div class="footer-cols">
+          <div>
+            <p class="footer-label">Visit</p>
+            <p class="footer-address">${address}</p>
+            <p class="footer-note">${hours}<br>Appointment only. No walk-ins.</p>
+          </div>
+          <div>
+            <p class="footer-label">Menu</p>
+            <nav class="footer-nav" aria-label="Footer">${links}</nav>
+          </div>
+          <div>
+            <p class="footer-label">Reach me</p>
+            <div class="footer-meta">
+              <a class="js-phone"></a>
+              <a class="js-email"></a>
+              <a class="js-tiktok">${SITE.tiktokHandle}</a>
+              <a class="js-profile">Google profile</a>
+              <a class="js-review">Leave a review</a>
+            </div>
+          </div>
         </div>
         <p class="copyright">© <span data-year></span> Valor Afro Cut. All rights reserved.</p>
       </div>
@@ -287,7 +305,7 @@ function setupServicesMore() {
   button.addEventListener("click", () => {
     const open = section.classList.toggle("is-open");
     button.setAttribute("aria-expanded", open ? "true" : "false");
-    button.textContent = open ? "See less" : "See more";
+    button.setAttribute("aria-label", open ? "Fold the list" : "See more");
   });
 }
 
