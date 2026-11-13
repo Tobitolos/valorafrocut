@@ -377,8 +377,11 @@ h1, h2, h3, p { margin: 0; }
 .price-card h3 { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; }
 .price-card .price { font-size: 1.8rem; font-weight: 550; letter-spacing: -0.04em; line-height: 1; }
 .price-card .btn { margin-top: auto; align-self: flex-start; }
+.services-more { display: block; width: fit-content; margin: 28px auto 0; }
+#services:not(.is-open) .service-groups { display: none; }
 .service-groups {
   display: grid;
+  margin-top: 48px;
   grid-template-columns: 1.5fr 0.9fr;
   gap: 48px;
   align-items: start;
@@ -837,6 +840,7 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
   .step-slider .step[data-pos="-1"] { transform: translateX(-52%) scale(0.86); }
   .to-top { right: 16px; bottom: calc(90px + env(safe-area-inset-bottom)); }
   .price-row, .cut-list { grid-template-columns: 1fr; }
+  #services:not(.is-open) .price-card:nth-child(n + 4) { display: none; }
   .choice-grid { grid-template-columns: 1fr 1fr; }
   .map-frame iframe { height: 240px; }
   .sheet { padding: 18px; }

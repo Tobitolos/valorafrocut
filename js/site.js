@@ -280,6 +280,17 @@ function pickService(key) {
   if (input) input.checked = true;
 }
 
+function setupServicesMore() {
+  const section = document.getElementById("services");
+  const button = section && section.querySelector(".services-more");
+  if (!button) return;
+  button.addEventListener("click", () => {
+    const open = section.classList.toggle("is-open");
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+    button.textContent = open ? "See less" : "See more";
+  });
+}
+
 function setupServicePicks() {
   document.querySelectorAll("[data-pick]").forEach((link) => {
     link.addEventListener("click", () => pickService(link.dataset.pick));
@@ -437,6 +448,7 @@ renderMobileBar();
 fillSiteBits();
 setupMenu();
 setupForms();
+setupServicesMore();
 setupServicePicks();
 setupScrollSpy();
 setupMotion();
