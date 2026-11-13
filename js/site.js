@@ -6,7 +6,7 @@ const SITE = {
   email: "hello@valorafrocut.com",
   tiktok: "https://www.tiktok.com/@valor.afrocut",
   tiktokHandle: "@valor.afrocut",
-  address: ["281 Livingstone Street West", "Barrie, ON L4N 7C7"],
+  address: ["281 Livingstone Street West", "Barrie, ON L4N 7A9"],
   googleProfile: "https://g.page/r/CQsgEQmhXPyUEBI",
   googleReview: "https://g.page/r/CQsgEQmhXPyUEBI/review",
   hours: [["Open", "9:00 AM – 9:00 PM"]],
