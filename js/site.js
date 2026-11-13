@@ -7,28 +7,25 @@ const SITE = {
   tiktok: "https://www.tiktok.com/@valor.afrocut",
   tiktokHandle: "@valor.afrocut",
   address: ["281 Livingstone Street West", "Barrie, ON L4N 7C7"],
-  hours: [
-    ["Monday – Thursday", "10:00 AM – 7:00 PM"],
-    ["Friday – Saturday", "9:00 AM – 7:00 PM"],
-    ["Sunday", "11:00 AM – 5:00 PM"],
-  ],
+  googleProfile: "https://g.page/r/CQsgEQmhXPyUEBI",
+  googleReview: "https://g.page/r/CQsgEQmhXPyUEBI/review",
+  hours: [["Open", "9:00 AM – 9:00 PM"]],
 };
 
 const NAV = [
   ["#top", "top", "Home"],
   ["#about", "about", "About"],
+  ["#services", "services", "Our Services"],
   ["#visit", "visit", "Book Now"],
 ];
 
 const SERVICE_PICKS = {
-  "afro-shape": "Afro Shape — $45",
-  fade: "Signature Fade — $40",
-  "cut-beard": "Cut and Beard — $65",
-  beard: "Beard Sculpt — $30",
-  waves: "Wave Session — $35",
-  kids: "Kids Cut — $30",
-  retwist: "Loc Retwist — $80",
-  ritual: "Valor Ritual — $140",
+  adult: "Adult Haircut — $30",
+  "cut-beard": "Cut and Beard — $35",
+  beard: "Beard — $15",
+  kids: "Kids — $20",
+  colour: "Hair Colouring — $10",
+  towel: "Face Massage + Hot Towel — $15",
 };
 
 const TIKTOK_ICON = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z"/></svg>`;
@@ -83,6 +80,8 @@ function renderFooter() {
           <a class="js-phone"></a>
           <a class="js-email"></a>
           <a class="js-tiktok">${SITE.tiktokHandle}</a>
+          <a class="js-profile">Google profile</a>
+          <a class="js-review">Leave a review</a>
         </div>
         <p class="copyright">© <span data-year></span> Valor Afro Cut. All rights reserved.</p>
       </div>
@@ -159,6 +158,12 @@ function fillSiteBits(root = document) {
     if (!node.classList.contains("icon-link") && !node.querySelector("svg")) {
       node.textContent = node.textContent || SITE.tiktokHandle;
     }
+  });
+  root.querySelectorAll(".js-profile, .js-review").forEach((node) => {
+    const review = node.classList.contains("js-review");
+    node.href = review ? SITE.googleReview : SITE.googleProfile;
+    node.target = "_blank";
+    node.rel = "noopener noreferrer";
   });
   root.querySelectorAll(".js-address").forEach((node) => {
     node.innerHTML = SITE.address.map((line) => `<span>${line}</span>`).join("");

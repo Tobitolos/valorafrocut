@@ -358,6 +358,47 @@ h1, h2, h3, p { margin: 0; }
 .meta { color: var(--muted); font-size: 0.92rem; }
 .card .btn { margin-top: auto; align-self: flex-start; }
 
+.price-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 56px;
+}
+.price-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 22px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 180px;
+}
+.price-card h3 { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; }
+.price-card .price { font-size: 1.8rem; font-weight: 550; letter-spacing: -0.04em; line-height: 1; }
+.price-card .btn { margin-top: auto; align-self: flex-start; }
+.service-groups {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+.service-groups h3 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.service-groups .group-next { margin-top: 32px; }
+.service-groups ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+.service-groups li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 1.02rem;
+}
+.cut-list { grid-template-columns: 1fr 1fr; column-gap: 28px; }
+
 .standards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
 .standard {
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -495,7 +536,7 @@ h1, h2, h3, p { margin: 0; }
 .info-block h3 { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; }
 .js-address, .stack { display: grid; gap: 2px; }
 .hours { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-.hours li, .price-row { display: flex; justify-content: space-between; gap: 16px; }
+.hours li { display: flex; justify-content: space-between; gap: 16px; }
 
 .sheet {
   background: #fff;
@@ -743,9 +784,11 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
   .nav.is-open a:nth-child(1) { transition-delay: 0.08s; }
   .nav.is-open a:nth-child(2) { transition-delay: 0.14s; }
   .nav.is-open a:nth-child(3) { transition-delay: 0.2s; }
-  .story, .split, .cards, .standards, .steps, .contact-grid, .info-grid, .products, .deals, .packages, .hire-band, .choice-grid, .two-col {
+  .story, .split, .cards, .standards, .steps, .contact-grid, .info-grid, .products, .deals, .packages, .hire-band, .choice-grid, .two-col, .service-groups {
     grid-template-columns: 1fr;
   }
+  .price-row { grid-template-columns: 1fr 1fr; }
+  .nav { gap: 6px; }
   .products { grid-template-columns: 1fr 1fr; }
   .triptych img, .frame, .frame img { min-height: 240px; height: 260px; }
   .deal .btn { margin-top: 22px; }
@@ -793,6 +836,7 @@ input:focus, select:focus, textarea:focus { border-color: #111; }
   .step-slider .step[data-pos="1"] { transform: translateX(52%) scale(0.86); }
   .step-slider .step[data-pos="-1"] { transform: translateX(-52%) scale(0.86); }
   .to-top { right: 16px; bottom: calc(90px + env(safe-area-inset-bottom)); }
+  .price-row, .cut-list { grid-template-columns: 1fr; }
   .choice-grid { grid-template-columns: 1fr 1fr; }
   .map-frame iframe { height: 240px; }
   .sheet { padding: 18px; }
